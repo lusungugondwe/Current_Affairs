@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:background="@color/white"
+    android:paddingLeft="40dp"
+    android:paddingRight="40dp"
+    tools:context=".LoggedOut">
+
+    <TextView
+        android:id="@+id/logout_textview"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Successfully logged out, Login now..."
+        />
+
+    <Button
+        android:id="@+id/login_btn"
+        android:layout_marginTop="7dp"
+        android:layout_below="@id/logout_textview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Login"
+        />
+</RelativeLayout>

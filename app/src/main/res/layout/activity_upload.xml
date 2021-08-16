@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="20dp"
+    android:background="@color/white"
+    android:orientation="vertical"
+    tools:context=".Upload">
+
+    <EditText
+        android:id="@+id/title"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:ems="10"
+        android:inputType="textPersonName"
+        android:hint="News title"
+        android:singleLine="true"
+        tools:layout_editor_absoluteX="199dp"
+        tools:layout_editor_absoluteY="311dp" />
+    <EditText
+        android:id="@+id/description"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:layout_below="@+id/title"
+        android:gravity="top"
+        android:layout_marginTop="10dp"
+        android:ems="10"
+        android:lines="10"
+        android:inputType="textPersonName"
+        android:hint="News description"
+        tools:layout_editor_absoluteX="199dp"/>
+
+    <ImageView
+        android:layout_below="@id/description"
+        android:id="@+id/image_view"
+        android:layout_width="match_parent"
+        android:src="@drawable/download_3"
+        android:scaleType="centerCrop"
+        android:layout_height="300dp"
+        />
+
+    <Button
+        android:id="@+id/create_news"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/image_view"
+        android:text="Create"
+        android:textAllCaps="false" />
+
+</RelativeLayout>
