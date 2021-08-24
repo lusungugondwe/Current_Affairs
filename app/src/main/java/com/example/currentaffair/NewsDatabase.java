@@ -12,6 +12,7 @@ public class NewsDatabase extends SQLiteOpenHelper {
     private static final String db_name = "current_affairs_db";
     private static final String tb_name = "current_affairs_tb";
     private static final String tb_user = "user_tb";
+    private static final String tb_comments = "comments_tb";
 
     public NewsDatabase(@Nullable Context context) {
         super(context, db_name, null, 1);
@@ -21,6 +22,7 @@ public class NewsDatabase extends SQLiteOpenHelper {
     public void onCreate(SQLiteDatabase db) {
         db.execSQL("CREATE TABLE "+tb_name+"(id integer primary key autoincrement, title text, description text, image BLOB)");
         db.execSQL("CREATE TABLE "+tb_user+"(id integer primary key autoincrement, email text, password text, state text)");
+        db.execSQL("CREATE TABLE "+tb_comments+"(id integer primary key autoincrement, comment text, news_id integer, user integer)");
 
     }
 
@@ -28,6 +30,7 @@ public class NewsDatabase extends SQLiteOpenHelper {
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS "+tb_name);
         db.execSQL("DROP TABLE IF EXISTS "+tb_user);
+        db.execSQL("DROP TABLE IF EXISTS "+tb_comments);
         onCreate(db);
     }
 
@@ -87,6 +90,22 @@ public class NewsDatabase extends SQLiteOpenHelper {
     public Cursor getNews(){
         SQLiteDatabase data = this.getReadableDatabase();
         Cursor cursor = data.rawQuery("SELECT * FROM "+tb_name+" ORDER BY id DESC", null);
+        return cursor;
+    }
+
+    public boolean insertComment(String comment, Integer newsId, Integer userId){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("comment", comment);
+        values.put("user", userId);
+        values.put("news_id", newsId);
+        database.insert(tb_comments, null, values);
+        return true;
+    }
+
+    public Cursor getAllComments(){
+        SQLiteDatabase data = this.getReadableDatabase();
+        Cursor cursor = data.rawQuery("SELECT * FROM "+tb_comments, null);
         return cursor;
     }
 }

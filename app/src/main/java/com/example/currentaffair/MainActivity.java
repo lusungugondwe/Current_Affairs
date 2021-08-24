@@ -49,7 +49,7 @@ public class MainActivity extends AppCompatActivity {
                 Intent comments = new Intent(MainActivity.this, ViewForCommenting.class);
 
                 NewsItem selectedItem = new NewsItem(news.get(position).getTitle().toString(), news.get(position).getBody().toString(), news.get(position).getBlob(), news.get(position).getId());
-                comments.putExtra("Comments", selectedItem);
+                comments.putExtra("ViewNewsDetails", selectedItem);
                 startActivity(comments);
 
             }
