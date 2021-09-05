@@ -20,9 +20,9 @@ public class NewsDatabase extends SQLiteOpenHelper {
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE "+tb_name+"(id integer primary key autoincrement, title text, description text, image BLOB)");
+        db.execSQL("CREATE TABLE "+tb_name+"(id integer primary key autoincrement, title text, description text, news_date text, image BLOB)");
         db.execSQL("CREATE TABLE "+tb_user+"(id integer primary key autoincrement, email text, password text, state text)");
-        db.execSQL("CREATE TABLE "+tb_comments+"(id integer primary key autoincrement, comment text, news_id integer, user integer)");
+        db.execSQL("CREATE TABLE "+tb_comments+"(id integer primary key autoincrement, comment text, news_id integer, user integer, comment_date text)");
 
     }
 
@@ -34,13 +34,14 @@ public class NewsDatabase extends SQLiteOpenHelper {
         onCreate(db);
     }
 
-    public void insertNews(String title, String description, byte[] image){
+    public void insertNews(String date, String title, String description, byte[] image){
         SQLiteDatabase database = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
         values.put("title", title);
         values.put("description", description);
         values.put("image", image);
+        values.put("news_date", date);
         database.insert(tb_name, null, values);
     }
 
@@ -61,12 +62,19 @@ public class NewsDatabase extends SQLiteOpenHelper {
         return users;
     }
 
-    public boolean updateUserState(String state){
+    public Cursor getUsers(String email, String password){
+        SQLiteDatabase database = this.getReadableDatabase();
+
+        Cursor users = database.rawQuery("SELECT email, password, state FROM "+tb_user+" WHERE email=? AND password=?", new String[]{email, password});
+        return users;
+    }
+
+    public boolean updateUserState(String state, String user){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("state", state);
 
-        int result = database.update(tb_user, values, "state=?",new String[]{state});
+        int result = database.update(tb_user, values, "email=?",new String[]{user});
         if (result >0){
             return true;
         }else {
@@ -93,19 +101,65 @@ public class NewsDatabase extends SQLiteOpenHelper {
         return cursor;
     }
 
-    public boolean insertComment(String comment, Integer newsId, Integer userId){
+    public boolean insertComment(String comment, Integer newsId, Integer userId, String date){
         SQLiteDatabase database = this.getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put("comment", comment);
         values.put("user", userId);
         values.put("news_id", newsId);
+        values.put("comment_date", date);
         database.insert(tb_comments, null, values);
         return true;
+    }
+
+    public Cursor getAllComments(Integer id){
+        SQLiteDatabase data = this.getReadableDatabase();
+        Cursor cursor = data.rawQuery("SELECT * FROM "+tb_comments+" WHERE news_id=?", new String[]{  String.valueOf(id)});
+        return cursor;
     }
 
     public Cursor getAllComments(){
         SQLiteDatabase data = this.getReadableDatabase();
         Cursor cursor = data.rawQuery("SELECT * FROM "+tb_comments, null);
         return cursor;
+    }
+
+    public boolean deleteNewsComments(Integer id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        long result = database.delete(tb_comments, "news_id=?", new String[]{String.valueOf(id)});
+
+        if (result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean deleteNews(Integer id){
+        SQLiteDatabase database = this.getWritableDatabase();
+        long result = database.delete(tb_name, "id=?", new String[]{String.valueOf(id)});
+
+        if (result > 0){
+            return true;
+        }else {
+            return false;
+        }
+    }
+
+    public boolean updateNews(String comment, Integer newsId, Integer userId, byte[] image, String date){
+        SQLiteDatabase database = this.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put("comment", comment);
+        values.put("user", userId);
+        values.put("news_id", newsId);
+        values.put("image", image);
+        values.put("comment_date", date);
+
+        long result = database.update(tb_name,values,"id=?", new String[]{String.valueOf(newsId)});
+        if (result > 0){
+            return true;
+        }else {
+            return false;
+        }
     }
 }

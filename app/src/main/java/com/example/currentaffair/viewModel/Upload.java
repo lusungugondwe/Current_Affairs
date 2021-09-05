@@ -1,4 +1,4 @@
-package com.example.currentaffair;
+package com.example.currentaffair.viewModel;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
@@ -15,8 +15,13 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.example.currentaffair.NewsDatabase;
+import com.example.currentaffair.R;
+
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 public class Upload extends AppCompatActivity {
 
@@ -79,7 +84,7 @@ public class Upload extends AppCompatActivity {
         String newsTitle = nTitle.getText().toString();
         String newsDescription = nDescription.getText().toString();
         if (!newsTitle.isEmpty() && !newsDescription.isEmpty()){
-            newsDatabase.insertNews(newsTitle, newsDescription, imgByte);
+            newsDatabase.insertNews(getDate(), newsTitle, newsDescription, imgByte);
             Toast.makeText(getApplicationContext(), "Successfully uploaded the news", Toast.LENGTH_SHORT).show();
             title.setText("");
             description.setText("");
@@ -100,5 +105,14 @@ public class Upload extends AppCompatActivity {
         }else {
             saveToDatabase(title, description, imageData);
         }
+    }
+
+    public  String getDate(){
+        Date objDate = new Date();
+        String strDateFormat = "MMM-dd-yyyy hh:mm:ss a"; //Date format is Specified
+        SimpleDateFormat objSDF = new SimpleDateFormat(strDateFormat); //Date format string is passed as an argument to the Date format object
+        String current_time = objSDF.format(objDate).toString();
+
+        return current_time;
     }
 }

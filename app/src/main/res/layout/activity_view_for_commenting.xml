@@ -54,7 +54,7 @@
             <TextView
                 android:textStyle="normal"
                 android:alpha="0.7"
-                android:id="@+id/news_date"
+                android:id="@+id/news_date_id"
                 android:layout_below="@+id/news_author"
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="1dp"
@@ -92,7 +92,7 @@
         android:padding="10dp"
         android:layout_below="@+id/top_2"
         android:layout_width="match_parent"
-        android:layout_height="330dp">
+        android:layout_height="270dp">
         <View
             android:id="@+id/line33"
             android:background="@color/teal_700"
@@ -119,10 +119,22 @@
 
     </androidx.cardview.widget.CardView>
 
+    <RelativeLayout
+        android:gravity="center"
+        android:id="@+id/rating_holder"
+        android:layout_width="match_parent"
+        android:layout_below="@+id/top_comments"
+        android:layout_height="wrap_content">
+        <RatingBar
+            android:id="@+id/userRatingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"/>
+
+    </RelativeLayout>
     <LinearLayout
+        android:layout_below="@+id/rating_holder"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/top_comments"
         android:layout_alignParentBottom="true"
         android:padding="10dp"
         android:orientation="horizontal"

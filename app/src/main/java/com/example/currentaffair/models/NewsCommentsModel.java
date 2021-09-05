@@ -1,14 +1,27 @@
-package com.example.currentaffair;
+package com.example.currentaffair.models;
 
 public class NewsCommentsModel {
     Integer commentId;
     String comment;
     Integer user;
+    String date;
 
-    public NewsCommentsModel(Integer user, Integer commentId, String comment) {
+    public NewsCommentsModel(Integer user, Integer commentId, String comment, String date) {
         this.commentId = commentId;
         this.comment = comment;
         this.user = user;
+        this.date = date;
+    }
+
+    public NewsCommentsModel(){
+
+    }
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public Integer getUser() {

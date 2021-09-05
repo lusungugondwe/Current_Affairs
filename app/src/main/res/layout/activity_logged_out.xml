@@ -9,7 +9,7 @@
     android:background="@color/white"
     android:paddingLeft="40dp"
     android:paddingRight="40dp"
-    tools:context=".LoggedOut">
+    tools:context=".viewModel.LoggedOut">
 
     <TextView
         android:id="@+id/logout_textview"

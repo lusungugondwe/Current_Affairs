@@ -1,9 +1,7 @@
-package com.example.currentaffair;
+package com.example.currentaffair.models;
 
 import android.os.Parcel;
 import android.os.Parcelable;
-
-import java.io.Serializable;
 
 public class NewsItem implements Parcelable {
     byte[] blob;
@@ -11,7 +9,7 @@ public class NewsItem implements Parcelable {
     String title;
     String body;
     String comment;
-
+    String newsDate;
     public NewsItem(String title, String body, byte[] blob, String comment, Integer id) {
         this.blob = blob;
         this.title = title;
@@ -25,11 +23,13 @@ public class NewsItem implements Parcelable {
         this.id = id;
     }
 
-    public NewsItem(String title, String body, byte[] blob, Integer id) {
+    public NewsItem(String title, String body, byte[] blob, Integer id, String newsDate, String comment) {
         this.title = title;
         this.body = body;
         this.blob = blob;
         this.id = id;
+        this.comment = comment;
+        this.newsDate = newsDate;
     }
 
     protected NewsItem(Parcel in) {
@@ -55,6 +55,14 @@ public class NewsItem implements Parcelable {
             return new NewsItem[size];
         }
     };
+
+    public String getNewsDate() {
+        return newsDate;
+    }
+
+    public void setNewsDate(String newsDate) {
+        this.newsDate = newsDate;
+    }
 
     public String getComment() {
         return comment;

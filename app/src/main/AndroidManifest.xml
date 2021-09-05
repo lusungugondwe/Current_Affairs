@@ -12,13 +12,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.CurrentAffair">
-        <activity android:name=".ViewForCommenting" android:parentActivityName=".MainActivity"></activity>
-        <activity android:name=".LoggedOut" />
+        <activity android:name=".viewModel.AdminControl"></activity>
+        <activity
+            android:name=".ViewForCommenting"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".viewModel.LoggedOut" />
         <activity android:name=".MainActivity" />
-        <activity android:name=".RegisterUser" />
-        <activity android:name=".Upload" android:parentActivityName=".MainActivity"/>
-        <activity android:name=".LoginUser" />
-        <activity android:name=".Launcher">
+        <activity android:name=".viewModel.RegisterUser" />
+        <activity
+            android:name=".viewModel.Upload"
+            android:parentActivityName=".MainActivity" />
+        <activity android:name=".viewModel.LoginUser" />
+        <activity android:name=".viewModel.Launcher">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,4 +1,4 @@
-package com.example.currentaffair;
+package com.example.currentaffair.viewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -10,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.currentaffair.NewsDatabase;
+import com.example.currentaffair.R;
 
 public class RegisterUser extends AppCompatActivity {
     Button reg_submit;

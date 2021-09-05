@@ -1,4 +1,4 @@
-package com.example.currentaffair;
+package com.example.currentaffair.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.currentaffair.models.NewsCommentsModel;
+import com.example.currentaffair.R;
 
 import java.util.ArrayList;
 
@@ -22,7 +25,6 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     }
 
     @NonNull
-
     @Override
     public CommentsAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(context).inflate(R.layout.comments_model, parent, false);
@@ -33,6 +35,7 @@ public class CommentsAdapter extends RecyclerView.Adapter<CommentsAdapter.ViewHo
     public void onBindViewHolder(@NonNull  CommentsAdapter.ViewHolder holder, int position) {
 //        holder.username.setText(nModels.get(position).getUser());
         holder.comment_id.setText(nModels.get(position).getComment());
+        holder.dateCommented.setText(nModels.get(position).getDate());
 
     }
 

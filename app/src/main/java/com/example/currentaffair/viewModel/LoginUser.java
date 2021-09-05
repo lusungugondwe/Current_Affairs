@@ -1,4 +1,4 @@
-package com.example.currentaffair;
+package com.example.currentaffair.viewModel;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -9,6 +9,10 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
+
+import com.example.currentaffair.MainActivity;
+import com.example.currentaffair.NewsDatabase;
+import com.example.currentaffair.R;
 
 public class LoginUser extends AppCompatActivity {
     Button submit;
@@ -27,6 +31,7 @@ public class LoginUser extends AppCompatActivity {
         errors = (TextView) findViewById(R.id.errors);
         password = (EditText) findViewById(R.id.password);
 
+
         submit.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -39,15 +44,18 @@ public class LoginUser extends AppCompatActivity {
                     if (user.getCount() == 0){
                         errors.setText("Invalid email or password combination, please try again");
                     }else {
-                        database.updateUserState("logged in");
+                        database.updateUserState("logged in", userEmail);
                         successMessage = "login";
                         email.setText("");
                         password.setText("");
-                        Intent newsIntent = new Intent(LoginUser.this, MainActivity.class);
-//                        newsIntent.putExtra("email", userEmail);
-//                        newsIntent.putExtra("password", userPassword);
-//                        newsIntent.putExtra("loginSuccessMessage", successMessage);
-                        startActivity(newsIntent);
+                        if (userEmail.equals("currentaffairs-admin@gmail.com")){
+                            Intent admin = new Intent(LoginUser.this, AdminControl.class);
+                            startActivity(admin);
+                        }else {
+                            Intent newsIntent = new Intent(LoginUser.this, MainActivity.class);
+
+                            startActivity(newsIntent);
+                        }
                     }
 
                 }

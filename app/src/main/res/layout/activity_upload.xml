@@ -7,7 +7,7 @@
     android:padding="20dp"
     android:background="@color/white"
     android:orientation="vertical"
-    tools:context=".Upload">
+    tools:context=".viewModel.Upload">
 
     <EditText
         android:id="@+id/title"

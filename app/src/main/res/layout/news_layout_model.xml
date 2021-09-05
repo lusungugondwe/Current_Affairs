@@ -30,8 +30,8 @@
                 android:id="@+id/memnber_name_id"
                 android:src="@drawable/download_3"
                 android:textStyle="bold"
-                android:layout_width="70dp"
-                android:layout_height="70dp"
+                android:layout_width="60dp"
+                android:layout_height="60dp"
                 android:text="TextView"
                 android:layout_gravity="center"
                 />
